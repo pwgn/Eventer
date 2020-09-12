@@ -1,12 +1,13 @@
 import { Distributor } from './distributor';
 import { Engine } from './engine';
-import { EventGenerator }  from './event-generator';
+import { EventGenerator }  from './eventGenerator';
 
 export class SingleEngine implements Engine {
     eventGenerator: EventGenerator;
     distributor: Distributor;
+    config: any;
 
-    constructor(eventGenerator: EventGenerator, distributor: Distributor) {
+    constructor(config: any, eventGenerator: EventGenerator, distributor: Distributor) {
         this.eventGenerator = eventGenerator;
         this.distributor = distributor;
     }

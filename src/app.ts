@@ -1,18 +1,15 @@
-import { ConsoleDistributor } from './console-distributor'
-import { SingleEngine } from './single-engine'
-import { EventSpecificationParser } from './event-spec-parser'
-import { EventGenerator, EventSpecification}  from './event-generator';
+import { ConsoleDistributor } from './consoleDistributor'
+import { SingleEngine } from './singleEngine'
+import { EventGenerator, EventSpecification}  from './eventGenerator';
+import { KafkaDistributor } from './kafkaDistributor';
+import { ContinuousEngine } from './contiuousEngine';
+import { Config } from './config';
 
 function main() {
-    let eventSpecificationParser = new EventSpecificationParser();
-    let eventSpec = eventSpecificationParser.fromFile('./spec');
-
-    let eventGenerator = new EventGenerator(eventSpec);
-    let event = eventGenerator.createEvent();
-
-    let distributor = new ConsoleDistributor();
-
-    let engine = new SingleEngine(eventGenerator, distributor);
+    let config: Config = require('../config.json')
+    let eventGenerator = new EventGenerator(config.eventSpec);
+    let distributor = new KafkaDistributor(config.distributor);
+    let engine = new ContinuousEngine(config.engine, eventGenerator, distributor);
     engine.run();
 }
 

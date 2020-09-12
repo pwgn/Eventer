@@ -1,0 +1,15 @@
+{
+    "eventSpec": {
+        "name": "{{name.firstName}} {{name.lastName}}",
+        "email": "{{internet.email}}"
+    },
+    "distributor": {
+        "clientId": "eventer",
+        "brokers": ["localhost:9092"],
+        "topic": "input"
+    },
+    "engine": {
+        "count": 5,
+        "delay": 500
+    }
+}
